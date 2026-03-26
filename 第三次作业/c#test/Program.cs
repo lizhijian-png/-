@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace AlarmClockApp
 {
-    // 1. 自定义事件参数类，用来传递时间信息
+    // 事件参数用来传递时间信息
     public class ClockEventArgs : EventArgs
     {
         public DateTime CurrentTime { get; }
@@ -14,7 +14,6 @@ namespace AlarmClockApp
     public class AlarmClock
     {
         // 定义事件：Tick (嘀嗒) 和 Alarm (响铃)
-        // EventHandler<T> 是 C# 标准的事件委托
         public event EventHandler<ClockEventArgs> Tick;
         public event EventHandler<ClockEventArgs> Alarm;
 
@@ -25,7 +24,7 @@ namespace AlarmClockApp
             _targetTime = targetTime;
         }
 
-        // 启动闹钟的方法
+        // 启动闹钟
         public void Start()
         {
             Console.WriteLine($"闹钟已设定为: {_targetTime:HH:mm:ss}\n");
@@ -34,7 +33,7 @@ namespace AlarmClockApp
             {
                 DateTime now = DateTime.Now;
 
-                // 触发嘀嗒事件
+                // 触发嘀嗒
                 OnTick(new ClockEventArgs(now));
 
                 // 检查是否到达预设时间
@@ -50,10 +49,10 @@ namespace AlarmClockApp
             }
         }
 
-        // 触发事件的规范方法 (通常以 On+事件名 命名)
+        // 触发事件
         protected virtual void OnTick(ClockEventArgs e)
         {
-            // ?.Invoke 是为了防止没有订阅者时出现空引用异常
+            
             Tick?.Invoke(this, e);
         }
 
@@ -63,7 +62,7 @@ namespace AlarmClockApp
         }
     }
 
-    // 3. 客户端（事件订阅者 Subscriber）
+    
     class Program
     {
         static void Main(string[] args)
@@ -72,12 +71,12 @@ namespace AlarmClockApp
             DateTime alarmTime = DateTime.Now.AddSeconds(5);
             AlarmClock myClock = new AlarmClock(alarmTime);
 
-            // --- 订阅事件 ---
-            // 使用 += 符号将方法绑定到事件上
+          
+           
             myClock.Tick += ShowTick;
             myClock.Alarm += ShowAlarm;
 
-            // 也可以使用 Lambda 表达式简写订阅
+            
             myClock.Alarm += (sender, e) => {
                 Console.Beep(); // 顺便让电脑响一声
             };
@@ -88,13 +87,13 @@ namespace AlarmClockApp
             Console.ReadKey();
         }
 
-        // 响应嘀嗒的方法
+        // 响应嘀
         static void ShowTick(object sender, ClockEventArgs e)
         {
             Console.WriteLine($"[嘀嗒]: {e.CurrentTime:HH:mm:ss}");
         }
 
-        // 响应响铃的方法
+        // 响应响铃
         static void ShowAlarm(object sender, ClockEventArgs e)
         {
             Console.ForegroundColor = ConsoleColor.Red;
