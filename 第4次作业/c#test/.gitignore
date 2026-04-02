@@ -1,0 +1,64 @@
+## Visual Studio .NET 专用 .gitignore
+## 适用于：控制台、WinForms、WPF、ASP.NET Core、类库 所有项目
+
+# 编译输出目录
+[Bb]in/
+[Oo]bj/
+[Rr]elease/
+[Dd]ebug/
+x64/
+x86/
+arm/
+arm64/
+
+# NuGet 包
+packages/
+*.nupkg
+*.snupkg
+
+# Visual Studio 缓存、用户配置、临时文件
+.vs/
+*.user
+*.suo
+*.sln.docstates
+*.useross
+*.dbmdl
+*.jfm
+*.ide/
+*.ide-wal/
+*.Designer.cs~
+*.resharper
+*.resharper.user
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# 日志、临时文件
+*.log
+*.tmp
+*.temp
+*.cache
+
+# 测试与覆盖率
+TestResults/
+*.coverage
+*.coveragexml
+
+# 发布文件
+publish/
+*.pubxml
+*.publishproj
+App_Data/
+
+# 数据库本地文件
+*.mdf
+*.ldf
+*.sdf
+
+# 开发环境配置（本地敏感信息）
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+
+# 操作系统自动生成文件
+Thumbs.db
+.DS_Store
